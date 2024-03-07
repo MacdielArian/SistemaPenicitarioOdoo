@@ -1,4 +1,5 @@
 
+
 from odoo import fields, models, api
 
 class FugaGrupal(models.Model):
@@ -7,10 +8,10 @@ class FugaGrupal(models.Model):
     _description = 'Fuga grupal'
 
     cant_prisioneros_fuga = fields.Integer( string = 'Cantidad de prisioneros a la fuga', default = 1 )
-    fuga_exitosa = fields.Boolean( string = 'Fuga exitosa', compute = '_compute_fuga_exitosa' )
+    fuga_exitosa = fields.Boolean( string = 'Fuga exitosa' )
 
     api.constrains('cant_prisioneros_fuga')
-    def _compute_fuga_exitosa(self):
+    def fuga_grupal(self):
 
         pos_preso_mayor_prestigio = []
         pos_lider = 0
@@ -21,51 +22,38 @@ class FugaGrupal(models.Model):
 
         todas_celdas = self.env['celda'].search([])
         todos_fosos = self.env['foso'].search([])
-        cant_celdas = len( todas_celdas )
 
         for record in self:
 
             #Recorrer cada celda buscando el mayor prestigio
-            i = 0
+        
+            for i in range ( record.cant_prisioneros_fuga ):
 
-            for celda in todas_celdas:
-
-                if celda.tipo_prisionero == 'permanente':
+                if todas_celdas[i].tipo_prisionero == 'permanente':
                     
-                    if mayor_prestigio < celda.prisionero_permanente.prestigio:
-                        mayor_prestigio = celda.prisionero_permanente.prestigio
+                    if mayor_prestigio < todas_celdas[i].prisionero_permanente.prestigio:
+                        mayor_prestigio = todas_celdas[i].prisionero_permanente.prestigio
                 
-                elif celda.tipo_prisionero == 'temporal':
+                elif todas_celdas[i].tipo_prisionero == 'temporal':
 
-                    if mayor_prestigio < celda.prisionero_temporal.prestigio:
-                        mayor_prestigio = celda.prisionero_temporal.prestigio
+                    if mayor_prestigio < todas_celdas[i].prisionero_temporal.prestigio:
+                        mayor_prestigio = todas_celdas[i].prisionero_temporal.prestigio
 
-                tiempo_total_grupo_guardia += celda.grupo_guardia.tiempo_respuesta
-
-                i += 1
-
-                if i == record.cant_prisioneros_fuga:
-                    break
-
+                tiempo_total_grupo_guardia += todas_celdas[i].grupo_guardia.tiempo_respuesta
+         
             # Buscar al lider o a los lideres
-            i = 0
+            for i in range( record.cant_prisioneros_fuga ):
 
-            for celda in todas_celdas:
+                if todas_celdas[i].tipo_prisionero == 'permanente':
 
-                if celda.tipo_prisionero == 'permanente':
-
-                    if celda.prisionero_permanente.prestigio == mayor_prestigio:
+                    if todas_celdas[i].prisionero_permanente.prestigio == mayor_prestigio:
                         pos_preso_mayor_prestigio.append( i )
     
-                elif celda.tipo_prisionero == 'temporal':
+                elif todas_celdas[i].tipo_prisionero == 'temporal':
 
-                    if celda.prisionero_temporal.prestigio == mayor_prestigio:
+                    if todas_celdas[i].prisionero_temporal.prestigio == mayor_prestigio:
                         pos_preso_mayor_prestigio.append( i )
 
-                i += 1
-
-                if i == record.cant_prisioneros_fuga:
-                    break
 
             if len( pos_preso_mayor_prestigio ) == 1:
 
@@ -75,64 +63,53 @@ class FugaGrupal(models.Model):
 
                 for pos in pos_preso_mayor_prestigio:
 
-                    if celda.tipo_prisionero == 'permanente':
+                    if todas_celdas[pos].tipo_prisionero == 'permanente':
 
-                        if celda[pos].prisionero_permanente.tiempo_fuga_individual_permanente < menos_tiempo_fuga_individual:
-                            menos_tiempo_fuga_individual = celda[pos].prisionero_permanente.tiempo_fuga_individual_permanente
+                        if todas_celdas[pos].prisionero_permanente.tiempo_fuga_individual_permanente < menos_tiempo_fuga_individual:
+                            menos_tiempo_fuga_individual = todas_celdas[pos].prisionero_permanente.tiempo_fuga_individual_permanente
                             pos_lider = pos
 
-                    elif celda.tipo_prisionero == 'temporal':
+                    elif todas_celdas[pos].tipo_prisionero == 'temporal':
 
-                        if celda[pos].prisionero_temporal.tiempo_fuga_individual_temporal < menos_tiempo_fuga_individual:
-                            menos_tiempo_fuga_individual = celda[pos].prisionero_temporal.tiempo_fuga_individual_temporal
+                        if todas_celdas[pos].prisionero_temporal.tiempo_fuga_individual_temporal < menos_tiempo_fuga_individual:
+                            menos_tiempo_fuga_individual = todas_celdas[pos].prisionero_temporal.tiempo_fuga_individual_temporal
                             pos_lider = pos
 
             # Saber el tiempo de fuga grupal
 
-            i = 0
-
-            for celda in todas_celdas:
+            for i in range( record.cant_prisioneros_fuga ):
 
                 if i != pos_lider:
 
-                    if celda[i].tipo_prisionero == 'permanente':
+                    if todas_celdas[i].tipo_prisionero == 'permanente':
 
-                        tiempo_fuga_grupal += celda[i].prisionero_permanente.tiempo_fuga_individual_permanente
+                        tiempo_fuga_grupal += todas_celdas[i].prisionero_permanente.tiempo_fuga_individual_permanente
                     
-                    elif celda[i].tipo_prisionero == 'temporal':
+                    elif todas_celdas[i].tipo_prisionero == 'temporal':
 
-                        tiempo_fuga_grupal += celda[i].prisionero_temporal.tiempo_fuga_individual_temporal
+                        tiempo_fuga_grupal += todas_celdas[i].prisionero_temporal.tiempo_fuga_individual_temporal
 
                 else:
 
-                    if celda[pos_lider].tipo_prisionero == 'permanente':
+                    if todas_celdas[pos_lider].tipo_prisionero == 'permanente':
 
-                        tiempo_fuga_grupal += celda[pos_lider].prisionero_permanente.tiempo_fuga_individual_permanente + ( record.cant_prisioneros_fuga - 1 )
+                        tiempo_fuga_grupal += todas_celdas[pos_lider].prisionero_permanente.tiempo_fuga_individual_permanente + ( record.cant_prisioneros_fuga - 1 )
 
-                    elif celda[pos_lider].tipo_prisionero == 'temporal':
+                    elif todas_celdas[pos_lider].tipo_prisionero == 'temporal':
 
-                        tiempo_fuga_grupal += celda[pos_lider].prisionero_temporal.tiempo_fuga_individual_temporal + ( record.cant_prisioneros_fuga - 1 )
-
-                i += 1
-
-                if i == record.cant_prisioneros_fuga:
-                    break
+                        tiempo_fuga_grupal += todas_celdas[pos_lider].prisionero_temporal.tiempo_fuga_individual_temporal + ( record.cant_prisioneros_fuga - 1 )
 
             # Comprobar si la fuga fue exitosa o no
-            if tiempo_total_grupo_guardia > tiempo_fuga_grupal:
+            if tiempo_total_grupo_guardia < tiempo_fuga_grupal:
 
-                i = 0
+                for i in range( record.cant_prisioneros_fuga ):
 
-                for celda in todas_celdas:
-
-                    if celda.tipo_prisionero == 'permanente':
-                        celda.prisionero_permanente.annos_condena = celda.prisionero_permanente.annos_condena + 1
-                    elif celda.tipo_prisionero == 'temporal':
-                        celda.prisionero_temporal.annos_condena = celda.prisionero_temporal.annos_condena + 1
-
-                    if i == record.cant_prisioneros_fuga:
-                        break
+                    if todas_celdas[i].tipo_prisionero == 'permanente':
+                        todas_celdas[i].prisionero_permanente.annos_condena = todas_celdas[i].prisionero_permanente.annos_condena + 1
+                    elif todas_celdas[i].tipo_prisionero == 'temporal':
+                        todas_celdas[i].prisionero_temporal.annos_condena = todas_celdas[i].prisionero_temporal.annos_condena + 1
                 
+               
                 self.env['foso'].create({
                     'numero_piso_foso' : len( todos_fosos ) + 1,
                     'tipo_prisionero' : todas_celdas[pos_lider].tipo_prisionero,
@@ -144,21 +121,19 @@ class FugaGrupal(models.Model):
 
                 todas_celdas[pos_lider].unlink()
 
-                record.fuga_exitosa = True
-
-            else:
-
                 record.fuga_exitosa = False
 
-                i = 0
+            else:
+                
+   
+                for i in range( record.cant_prisioneros_fuga ):
 
-                for celda in todas_celdas:
+                    celda = todas_celdas[i]
 
-                    celda[pos_lider].unlink()
+                    celda.unlink()
+                
 
-                    if i == record.cant_prisioneros_fuga:
-                        break
-
+                record.fuga_exitosa = True
             
 
 
