@@ -1,0 +1,42 @@
+<odoo>
+
+    <record id='foso_form' model='ir.ui.view'>
+        <field name='name'>Foso formulario</field>
+        <field name='model'>foso</field>
+        <field name='arch' type='xml'>
+            <form string='Foso formulario'>
+                <sheet>
+                    <group>
+                        <field name = 'numero_piso_foso' />
+                        <field name = 'tipo_prisionero' />
+                        <field name = 'prisionero_permanente' />
+                        <field name = 'prisionero_temporal' />
+                        <field name = 'dias_restantes' />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='foso_tree' model='ir.ui.view'>
+        <field name='name'>Foso tabla</field>
+        <field name='model'>foso</field>
+        <field name='arch' type='xml'>
+            <tree string='Foso tabla'>
+                <field name = 'numero_piso_foso' />
+                <field name = 'grupo_guardia' />
+                <field name = 'tipo_prisionero' />
+                <field name = 'prisionero_permanente' />
+                <field name = 'prisionero_temporal' />
+                <field name = 'dias_restantes' />
+            </tree>
+        </field>
+    </record>
+    
+    <record id='action_foso' model='ir.actions.act_window'>
+        <field name='name'>Foso</field>
+        <field name='res_model'>foso</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+</odoo>

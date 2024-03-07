@@ -1,0 +1,25 @@
+
+<odoo>
+    
+    <record id='prisionero_view_tree' model='ir.ui.view'>
+        <field name='name'>Prisionero Tabla</field>
+        <field name='model'>prisionero</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='name' />
+                <field name='nivel_escolaridad' />
+                <field name='pandilla' />
+                <field name='annos_condena' />
+                <field name='asesinato' />
+                <field name='prestigio' />
+            </tree>
+        </field>
+    </record>
+
+    <record id = 'action_prisionero' model = 'ir.actions.act_window'>
+        <field name = 'name'>Prisionero</field>
+        <field name ='res_model'>prisionero</field>
+        <field name = 'view_mode'>tree,form</field>
+    </record>
+    
+</odoo>

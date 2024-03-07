@@ -1,0 +1,45 @@
+<odoo>
+
+    <record id='grupo_guardia_view_form' model='ir.ui.view'>
+        <field name='name'>Grupo Guardia Form</field>
+        <field name='model'>grupo.guardia</field>
+        <field name='arch' type='xml'>
+            <form string='Grupo de Guardia'>
+                <sheet>
+                    <group>
+                        <field name = 'name' />
+                        <field name='cantidad_vigilantes' />
+                        <field name='experiencia_promedio' />
+                        <field name='extrictos' />
+                        <field name='confiabilidad' />
+                        <field name='tiempo_respuesta' />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='grupo_guardia_view_tree' model='ir.ui.view'>
+        <field name='name'>Grupo Guardia Tree</field>
+        <field name='model'>grupo.guardia</field>
+        <field name='arch' type='xml'>
+            <tree string='Grupo de Guardia'>
+                <field name = 'name' />
+                <field name='cantidad_vigilantes' />
+                <field name='experiencia_promedio' />
+                <field name='extrictos' />
+                <field name='confiabilidad' />
+                <field name='tiempo_respuesta' />
+            </tree>
+        </field>
+    </record>
+
+    <record id='action_grupo_guardia' model='ir.actions.act_window'>
+        <field name='name'>Grupo Guardia</field>
+        <field name='res_model'>grupo.guardia</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+   
+
+</odoo>

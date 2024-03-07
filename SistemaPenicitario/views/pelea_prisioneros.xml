@@ -1,0 +1,39 @@
+
+<odoo>
+
+    <record id = 'pelea_prisioneros_form_view' model = 'ir.ui.view'>
+        <field name = 'name'>Pelea Prisioneros Form</field>
+        <field name = 'model'>pelea.prisioneros</field>
+        <field name = 'arch' type = 'xml'>
+            <form>
+                <header>
+                    <button name = 'pelea_prisioneros' string = 'Pelear' type = 'object' class = 'oe_highlight' />
+                </header>
+                <sheet>
+                    <group>
+                        <field name = 'celda1' />
+                        <field name = 'celda2' />
+                        <field name = 'ganador' />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id = 'pelea_prisionero_form_tree' model = 'ir.ui.view'>
+        <field name = 'name'>Pelea Prisioneros Tree</field>
+        <field name = 'model'>pelea.prisioneros</field>
+        <field name = 'arch' type = 'xml'>
+            <tree>
+                <field name = 'ganador' />
+            </tree>
+        </field>
+    </record>
+
+    <record id = 'action_pelea_prisioneros' model = 'ir.actions.act_window'>
+        <field name = 'name'>Pelea prisioneros</field>
+        <field name = 'res_model'>pelea.prisioneros</field>
+        <field name = 'view_mode'>tree,form</field>
+    </record>
+
+</odoo>

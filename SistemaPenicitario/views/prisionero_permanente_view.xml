@@ -1,0 +1,52 @@
+<odoo>
+
+    <record id='prisionero_permanente_view_form' model='ir.ui.view'>
+        <field name='name'>Prisionero Permanente Formulario</field>
+        <field name='model'>prisionero.permanente</field>
+        <field name='arch' type='xml'>
+            <form>
+                <sheet>
+                    <group>
+                        <field name='name' />
+                        <field name='nivel_escolaridad' />
+                        <field name='pandilla' />
+                        <field name='annos_condena' />
+                        <field name='asesinato' />
+                        <field name='prestigio' />
+                        <field name='relacion_guardia' />
+                        <field name='relacion_prisionero' />
+                        <field name = 'tiempo_fuga_individual_permanente' />
+                        <field name = 'nivel_peligrosidad_permanente' />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='prisionero_permanente_view_tree' model='ir.ui.view'>
+        <field name='name'>Prisionero Permanente Tabla</field>
+        <field name='model'>prisionero.permanente</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='name' />
+                <field name='nivel_escolaridad' />
+                <field name='pandilla' />
+                <field name='annos_condena' />
+                <field name='asesinato' />
+                <field name='prestigio' />
+                <field name='relacion_guardia' />
+                <field name='relacion_prisionero' />
+                <field name = 'tiempo_fuga_individual_permanente' />
+                <field name = 'nivel_peligrosidad_permanente' />
+            </tree>
+        </field>
+    </record>
+
+    <record id = 'action_prisionero_permanente' model = 'ir.actions.act_window'>
+        <field name = 'name'>Prisionero Permanente</field>
+        <field name ='res_model'>prisionero.permanente</field>
+        <field name = 'view_mode'>tree,form</field>
+    </record>
+
+
+</odoo>

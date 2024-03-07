@@ -1,0 +1,52 @@
+
+<odoo>
+    
+    <record id='prisionero_temporal_view_form' model='ir.ui.view'>
+        <field name='name'>Prisionero Temporal Formulario</field>
+        <field name='model'>prisionero.temporal</field>
+        <field name='arch' type='xml'>
+            <form>
+                <sheet>
+                    <group>
+                        <field name='name' />
+                        <field name='nivel_escolaridad' />
+                        <field name='pandilla' />
+                        <field name='annos_condena' />
+                        <field name='asesinato' />
+                        <field name='prestigio' />
+                        <field name='experiencia_combate' />
+                        <field name='nivel_adaptacion' />
+                        <field name = 'tiempo_fuga_individual_temporal' />
+                        <field name = 'nivel_peligrosidad_temporal' />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='prisionero_temporal_view_tree' model='ir.ui.view'>
+        <field name='name'>Prisionero Temporal Tabla</field>
+        <field name='model'>prisionero.temporal</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='name' />
+                <field name='nivel_escolaridad' />
+                <field name='pandilla' />
+                <field name='annos_condena' />
+                <field name='asesinato' />
+                <field name='prestigio' />
+                <field name='experiencia_combate' />
+                <field name='nivel_adaptacion' />
+                <field name = 'tiempo_fuga_individual_temporal' />
+                <field name = 'nivel_peligrosidad_temporal' />
+            </tree>
+        </field>
+    </record>
+
+    <record id = 'action_prisionero_temporal' model = 'ir.actions.act_window'>
+        <field name = 'name'>Prisionero Temporal</field>
+        <field name ='res_model'>prisionero.temporal</field>
+        <field name = 'view_mode'>tree,form</field>
+    </record>
+
+</odoo>

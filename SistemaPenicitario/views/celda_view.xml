@@ -1,0 +1,54 @@
+<odoo>
+
+    <record id='celda_form' model='ir.ui.view'>
+        <field name='name'>Celda Formulario</field>
+        <field name='model'>celda</field>
+        <field name='arch' type='xml'>
+            <form string='Celda Formulario'>
+                <sheet>
+                    <group>
+                        <field name='grupo_guardia' />
+                        <field name='tipo_prisionero' />
+                        <field name='prisionero_permanente'
+                            invisible="tipo_prisionero != 'permanente'" />
+                        <field name='prisionero_temporal' invisible="tipo_prisionero != 'temporal'" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='celda_tree' model='ir.ui.view'>
+        <field name='name'>Celda Tabla</field>
+        <field name='model'>celda</field>
+        <field name='arch' type='xml'>
+            <tree string='Celda Tabla'>
+                <field name='numero_celda' />
+                <field name='grupo_guardia' />
+                <field name='prisionero_permanente' />
+                <field name='prisionero_temporal' />
+            </tree>
+        </field>
+    </record>
+
+    <record id = 'action_reordenar_celda' model ='ir.actions.server'>
+        <field name = 'name'>Reordenar celda</field>
+        <field name = 'model_id' ref = 'model_celda' />
+        <field name = 'state'>code</field>
+        <field name = 'code'>model.transcurrir_dia()</field>
+    </record>
+
+    <record id = 'action_fuga_individual' model = 'ir.actions.server'>
+        <field name = 'name'>Fuga individual</field>
+        <field name = 'model_id' ref = 'model_celda' />
+        <field name = 'state'>code</field>
+        <field name = 'code'>model.fugo_individual()</field>
+    </record>
+
+    <record id='action_celda' model='ir.actions.act_window'>
+        <field name='name'>Celda</field>
+        <field name='res_model'>celda</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.grupo.guardia,access_grupo.guardia,model_grupo_guardia,base.group_user,1,1,1,1
+access.prisionero,access_prisionero,model_prisionero,base.group_user,1,1,1,1
+access.prisionero.permanente,access_prisionero.permanente,model_prisionero_permanente,base.group_user,1,1,1,1
+access.prisionero.temporal,access_prisionero.temporal,model_prisionero_temporal,base.group_user,1,1,1,1
+access.celda,access_celda,model_celda,base.group_user,1,1,1,1
+access.foso,access_foso,model_foso,base.group_user,1,1,1,1
+access.fuga.grupal,access_fuga.grupal,model_fuga_grupal,base.group_user,1,1,1,1
+access.pelea.prisioneros,access_pelea.prisioneros,model_pelea_prisioneros,base.group_user,1,1,1,1

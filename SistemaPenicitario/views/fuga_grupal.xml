@@ -1,0 +1,35 @@
+<odoo>
+
+    <record id='fuga_grupal_form_view' model='ir.ui.view'>
+        <field name='name'>Fuga Grupal Form</field>
+        <field name='model'>fuga.grupal</field>
+        <field name='arch' type='xml'>
+            <form>
+                <sheet>
+                    <group>
+                        <field name='cant_prisioneros_fuga' />
+                        <field name = 'fuga_exitosa' />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id='fuga_grupal_tree_view' model='ir.ui.view'>
+        <field name='name'>Fuga Grupal Tree</field>
+        <field name='model'>fuga.grupal</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='cant_prisioneros_fuga' />
+                <field name = 'fuga_exitosa' />
+            </tree>
+        </field>
+    </record>
+
+    <record id='action_fuga_grupal' model='ir.actions.act_window'>
+        <field name='name'>Fuga grupal</field>
+        <field name='res_model'>fuga.grupal</field>
+        <field name='view_mode'>tree,form</field>
+    </record>
+
+</odoo>

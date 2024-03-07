@@ -1,0 +1,112 @@
+<odoo>
+
+    <menuitem id="sistema_penicitario_menu_root" web_icon="module_name,static/description/icon.png" />
+
+    <menuitem
+        id='sistema_penicitario_menu'
+        name='Sistema Penicitario'
+        sequence='20'
+    />
+
+    <menuitem
+        id='grupo_guardia_menu_root'
+        name='Grupo guardia'
+        parent='sistema_penicitario_menu'
+        sequence='10'
+    />
+
+    <menuitem
+        id='celda_menu'
+        name='Celda'
+        parent='sistema_penicitario_menu'
+        action='action_celda'
+        sequence='10'
+    />
+
+    <menuitem
+        id='grupo_guardia_menu'
+        name='Grupo guardia'
+        parent='grupo_guardia_menu_root'
+        action='action_grupo_guardia'
+        sequence='5'
+    />
+
+    <menuitem
+        id='prisionero_menu'
+        name='Prisionero'
+        parent='sistema_penicitario_menu'
+        sequence='10'
+    />
+
+    <menuitem
+        id='prisionero_parent_menu'
+        name='Prisionero'
+        parent='prisionero_menu'
+        action='action_prisionero'
+        sequence='5'
+    />
+
+    <menuitem
+        id='prisionero_permanente_menu'
+        name='Prisionero Permanente'
+        parent='prisionero_menu'
+        action='action_prisionero_permanente'
+        sequence='5'
+    />
+
+    <menuitem
+        id='prisionero_temporal_menu'
+        name='Prisionero Temporal'
+        parent='prisionero_menu'
+        action='action_prisionero_temporal'
+        sequence='5'
+    />
+
+    <menuitem
+        id='foso_menu'
+        name='Foso'
+        parent='sistema_penicitario_menu'
+        action='action_foso'
+        sequence='10'
+    />
+
+    <menuitem
+        id='options'
+        name='Opciones'
+        parent='sistema_penicitario_menu'
+        sequence='10'
+    />
+    
+    <menuitem
+        id='reordenar_celda'
+        name='Reordenar celda'
+        parent='options'
+        action='action_reordenar_celda'
+        sequence='5'
+    />
+
+    <menuitem
+        id='fuga_individual'
+        name='Fuga individual'
+        parent='options'
+        action='action_fuga_individual'
+        sequence='5'
+    />
+
+    <menuitem
+        id='fuga_grupal'
+        name='Fuga grupal'
+        parent='options'
+        action='action_fuga_grupal'
+        sequence='5'
+    />
+
+    <menuitem 
+        id = 'pelea_prisioneros'
+        name = 'Pelea prisioneros'
+        parent = 'options'
+        action = 'action_pelea_prisioneros'
+        sequence = '5'
+    />
+
+</odoo>
